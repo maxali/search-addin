@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <SharePointSiteUrl>https://skydata.sharepoint.com/sites/apps/</SharePointSiteUrl>
+    <GeneratedFeatureId>4eee8bdf-f026-4019-8d7a-dfa12f12e680</GeneratedFeatureId>
+    <GeneratedPackageId>ad914297-8377-4d33-a5e9-2b66a2758b34</GeneratedPackageId>
+    <GeneratedModuleId>{eecd605b-0c03-4c07-9734-6c7cfb9eccac}</GeneratedModuleId>
+    <GeneratedListId>{8498ec94-78f8-4a0c-94f2-22e3b0082d07}</GeneratedListId>
+    <GeneratedProductId>{d4596640-56c4-4cba-9a6f-a6b8d5971de6}</GeneratedProductId>
+    <GeneratedAppVersion>1.0.0.0</GeneratedAppVersion>
+    <GeneratedClientSecret>elnNaRD8PhGxyumZpzwinKzKrfp/Owhcsru+4uJC0o8=</GeneratedClientSecret>
+  </PropertyGroup>
+</Project>
