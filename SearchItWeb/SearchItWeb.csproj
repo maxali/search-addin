@@ -68,6 +68,16 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\css\App.css" />
+    <Content Include="Content\css\fabric.components.min.css" />
+    <Content Include="Content\css\fabric.min.css" />
+    <Content Include="Content\css\Office.css" />
+    <Content Include="Content\css\OfficeThemes.css" />
+    <Content Include="Content\js\app.search.js" />
+    <Content Include="Content\js\config.js" />
+    <Content Include="Content\js\SPLogin\SAML.xml" />
+    <Content Include="Content\js\SPLogin\SPTemp.js" />
+    <Content Include="Images\495.gif" />
     <Content Include="packages.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -78,7 +88,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
-    <Content Include="AddIn\App.css" />
     <Content Include="AddIn\App.js" />
     <Content Include="AddIn\Home\Home.css" />
     <Content Include="AddIn\Home\Home.html" />

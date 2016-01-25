@@ -18,3 +18,19 @@
 }
 .ms-ListItem-secondaryText, .ms-ListItem-tertiaryText {padding-right: 0;}
 .ms-ListItem-tertiaryText { line-height: 20px; }
+.ms-SearchBox {
+    margin: 0;
+    width:98% !important;
+}
+
+/** tabs */
+.tab.no-search {padding: 10px;}
+.pivot-tabs {
+
+}
+.pivot-tabs .tab{
+    display: none;
+}
+.pivot-tabs .selected{
+    display: block;
+}

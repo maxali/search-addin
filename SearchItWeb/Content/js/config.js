@@ -12,4 +12,20 @@ app.config = app.config || {};
     // public properties
     config.searchAPI = SEARCH_ENDPOINT + "?" + SEARCH_ACCOUNT + "&" + SEARCH_KEY + "&country=no&version=1.1.3&";
 
+
+    config.getEndpointBySerive = function (service) {
+        switch (service) {
+            case "companies":
+                return app.config.searchAPI;
+                break;
+            case "people":
+                return SEARCH_ENDPOINT + "?" + SEARCH_ACCOUNT + "&" + SEARCH_KEY + "&country=se&version=1.1.3&";
+                break;
+            default:
+                return "";
+        }
+
+    }
+
+
 })(app.config);
