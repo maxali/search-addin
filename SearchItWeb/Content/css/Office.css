@@ -12,17 +12,23 @@ body {
     border: 0;
     height: 100%;
     max-height: 100%;
+
+    scrollbar-base-color: white;
+    scrollbar-arrow-color: #ababab;
+    scrollbar-highlight-color: #ababab;
+    scrollbar-darkshadow-color: white;
+    scrollbar-track-color: white;
+    scrollbar-face-color: white;
+
+    font-family: "Segoe WP", "Segoe UI", "Arial", sans-serif;
+    font-size: 12px;
+    color: #262626;
+
 }
 
 /******************************************************************
 Typography
 ******************************************************************/
-body {
-    font-family: "Segoe WP", "Segoe UI", "Arial", sans-serif;
-    font-size: 12px;
-    color: #262626;
-}
-
 h1 {
     font-family: "Segoe WP Light", "Segoe UI", "Arial", sans-serif;
     font-size: 22px;
@@ -166,14 +172,57 @@ input, textarea, select, button {
             background-color: #cee5fc;
         }
 
-/******************************************************************
-Scrollbars
-******************************************************************/
-body {
-    scrollbar-base-color: white;
-    scrollbar-arrow-color: #ababab;
-    scrollbar-highlight-color: #ababab;
-    scrollbar-darkshadow-color: white;
-    scrollbar-track-color: white;
-    scrollbar-face-color: white;
+/* Common app styling */
+
+#content-header {
+    background: #2a8dd4;
+    color: #fff;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 60px; /* Fixed header height */
+    overflow: auto; /* Disable scrollbars for header */
 }
+
+#content-main {
+    background: #fff;
+    position: fixed;
+    top: 60px; /* Same value as #content-header's height */
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: auto; /* Enable scrollbars within main content section */
+}
+
+.padding {
+    padding: 10px 15px;
+}
+
+#notification-message {
+    background-color: #818285;
+    color: #fff;
+    position: absolute;
+    width: 100%;
+    min-height: 80px;
+    right: 0;
+    z-index: 100;
+    bottom: 0;
+    display: none; /* Hidden until invoked */
+}
+
+    #notification-message #notification-message-header {
+        font-size: medium;
+        margin-bottom: 10px;
+    }
+
+    #notification-message #notification-message-close {
+        background-image: url("../Images/Close.png");
+        background-repeat: no-repeat;
+        width: 24px;
+        height: 24px;
+        position: absolute;
+        right: 5px;
+        top: 5px;
+        cursor: pointer;
+    }

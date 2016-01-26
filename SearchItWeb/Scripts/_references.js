@@ -1,4 +1,5 @@
-﻿/// <reference path="jquery-1.9.1.js" />
+﻿/// <reference path="modernizr-2.6.2.js" />
+/// <reference path="jquery-1.10.2.js" />
 /* Required to correctly initalize Office.js for intellisense */
 /// <reference path="_officeintellisense.js" />
 /* Use offline copy of Office.js for intellisense */
