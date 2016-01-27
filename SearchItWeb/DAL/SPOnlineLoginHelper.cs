@@ -6,11 +6,12 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web;
+using System.Xml;
 using System.Xml.Linq;
 
 namespace SearchItWeb.DAL
 {
-    public class SPOnlineLoginHelper
+    class SPOnlineLoginHelper
     {
         #region Variables
         Uri spSiteUrl;
@@ -29,6 +30,7 @@ namespace SearchItWeb.DAL
         const string nssaml = "urn:oasis:names:tc:SAML:1.0:assertion";
         const string nswspolicy = "http://schemas.xmlsoap.org/ws/2004/09/policy";
         const string nspssoapf = "http://schemas.microsoft.com/Passport/SoapServices/SOAPFault";
+        const string SOAPACTION = "http://schemas.microsoft.com/sharepoint/soap/GetUpdatedFormDigestInformation";
         Stream stream;
         string tokenRequestXml;
         string token = null;
@@ -38,6 +40,14 @@ namespace SearchItWeb.DAL
         #endregion
 
         #region Properties
+        public string SoapEndpoint
+        {
+            get
+            {
+                return this.spSiteUrl.ToString() + "_vti_bin/sites.asmx";
+            }
+        }
+        public string MyProperty { get; set; }
         public static SPOnlineLoginHelper AuthObj
         {
             get
@@ -60,12 +70,18 @@ namespace SearchItWeb.DAL
             }
         }
         #endregion
+        public SPOnlineLoginHelper(Uri sharepointSiteUrl)
+        {
+            this.spSiteUrl = sharepointSiteUrl;
+        }
 
         public SPOnlineLoginHelper(Uri sharepointSiteUrl, string loginUserName, string loginPassword)
         {
-            spSiteUrl = sharepointSiteUrl;
-            username = loginUserName;
-            password = loginPassword;
+            this.spSiteUrl = sharepointSiteUrl;
+            this.username = loginUserName;
+            this.password = loginPassword;
+
+            samlXML = getSamlXML();
         }
 
 
@@ -75,8 +91,10 @@ namespace SearchItWeb.DAL
             this.spSiteUrl = siteurl;
             this.password = password;
             this.libraryname = libraryname;
+
+            samlXML = getSamlXML();
         }
-        
+
         /// <summary>
                 /// Function to get the cookies from sharepoint site by passing username and password
                 /// </summary>
@@ -95,6 +113,57 @@ namespace SearchItWeb.DAL
             return null;
         }
 
+
+        public SPAccessTokens RefreshDigestToken(string _soapEndpoint, CookieContainer _feAuthCookie)
+        {
+            if (_feAuthCookie != null)
+            {
+                SoapRequest soap = new SoapRequest(SoapEndpoint, SOAPACTION);
+                soap.cookie = _feAuthCookie;
+
+                string digestToken = soap.CallWebService();
+                XmlDocument xmlDigest = new XmlDocument();
+                xmlDigest.LoadXml(digestToken); // suppose that myXmlString contains "<Names>...</Names>"
+                digestToken = xmlDigest.GetElementsByTagName("DigestValue")[0].InnerText;
+
+
+                SPAccessTokens token = new SPAccessTokens();
+                token.cookies = _feAuthCookie.GetCookies(spSiteUrl);
+                token.requestDigest = digestToken;
+
+                return token;
+            }
+
+            return null;
+        }
+
+        public async Task<SPAccessTokens> GetAccessTokens()
+        {
+            // GET FeAuth and rtFA
+            CookieContainer feAuthCookie = await GetCookieContainer();
+
+            if (feAuthCookie != null)
+            {
+                SoapRequest soap = new SoapRequest(SoapEndpoint, SOAPACTION);
+                soap.cookie = feAuthCookie;
+
+                string digestToken = soap.CallWebService();
+                XmlDocument xmlDigest = new XmlDocument();
+                xmlDigest.LoadXml(digestToken); // suppose that myXmlString contains "<Names>...</Names>"
+                digestToken = xmlDigest.GetElementsByTagName("DigestValue")[0].InnerText;
+
+
+                SPAccessTokens token = new SPAccessTokens();
+                token.cookies = feAuthCookie.GetCookies(spSiteUrl);
+                token.requestDigest = digestToken;
+
+                return token;
+            }
+
+            return null;
+        }
+
+
         /// <summary>
                 /// Get the binary access token from  sharepoint site by passing username and password
                 /// </summary>
@@ -110,7 +179,7 @@ namespace SearchItWeb.DAL
                 XDocument loadedData = XDocument.Load(samlPath);
                 samlXML = loadedData.ToString();
             }
-            
+
             tokenRequestXml = string.Format(samlXML, userName, password, spSiteUrl.Host);
             var request = WebRequest.CreateHttp(msoAuthUrl);
             request.Method = HttpMethod.Post;
@@ -234,6 +303,43 @@ namespace SearchItWeb.DAL
                 throw new Exception("Could not retrieve Auth cookies");
         }
 
+        private string getSamlXML()
+        {
+            string SamlXML = @"<?xml version = ""1.0"" encoding=""UTF-8""?> " +
+                @"<s:Envelope xmlns:s=""http://www.w3.org/2003/05/soap-envelope"" xmlns:a=""http://www.w3.org/2005/08/addressing"" xmlns:u=""http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd"">" +
+                @"  <s:Header>" +
+                @"    <a:Action s:mustUnderstand=""1""> http://schemas.xmlsoap.org/ws/2005/02/trust/RST/Issue</a:Action>" +
+                @"    <a:ReplyTo>" +
+                @"      <a:Address>http://www.w3.org/2005/08/addressing/anonymous</a:Address>" +
+                @"    </a:ReplyTo>" +
+                @"    <a:To s:mustUnderstand=""1"" > https://login.microsoftonline.com/extSTS.srf</a:To>" +
+                @"    <o:Security s:mustUnderstand=""1"" xmlns:o=""http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd"">" +
+                @"      <o:UsernameToken>" +
+                @"        <o:Username>{0}</o:Username>" +
+                @"        <o:Password>{1}</o:Password>" +
+                @"      </o:UsernameToken>" +
+                @"    </o:Security>" +
+                @"  </s:Header>" +
+                @"  <s:Body>" +
+                @"    <t:RequestSecurityToken xmlns:t=""http://schemas.xmlsoap.org/ws/2005/02/trust"">" +
+                @"      <wsp:AppliesTo xmlns:wsp=""http://schemas.xmlsoap.org/ws/2004/09/policy"">" +
+                @"        <a:EndpointReference>" +
+                @"          <a:Address>{2}</a:Address>" +
+                @"        </a:EndpointReference>" +
+                @"      </wsp:AppliesTo>" +
+                @"      <t:KeyType>http://schemas.xmlsoap.org/ws/2005/05/identity/NoProofKey</t:KeyType>" +
+                @"      <t:RequestType>http://schemas.xmlsoap.org/ws/2005/02/trust/Issue</t:RequestType>" +
+                @"      <t:TokenType>urn:oasis:names:tc:SAML:1.0:assertion</t:TokenType>" +
+                @"    </t:RequestSecurityToken>" +
+                @"  </s:Body>" +
+                @"</s:Envelope>";
+
+            return SamlXML;
+
+        }
+
+
+
     }
     public static class HttpMethod
     {
@@ -248,4 +354,9 @@ namespace SearchItWeb.DAL
         public static string Patch { get { return "PATCH"; } }
     }
 
+    public class SPAccessTokens
+    {
+        public string requestDigest { get; set; }
+        public CookieCollection cookies { get; set; }
+    }
 }

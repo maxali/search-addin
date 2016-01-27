@@ -112,6 +112,7 @@
     <Content Include="Content\js\config.js" />
     <Content Include="Content\js\SPLogin\SAML.xml" />
     <Content Include="Content\js\SPLogin\SPTemp.js" />
+    <Content Include="Content\OfficeThemes.css" />
     <Content Include="Content\Site.css" />
     <Content Include="DAL\SAML.xml" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -126,39 +127,8 @@
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
-    <Content Include="Views\Web.config" />
-    <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="Scripts\jquery-1.10.2.min.map" />
-    <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\SP\index.cshtml" />
-    <Content Include="Views\Shared\_WebLayout.cshtml" />
-    <Content Include="Views\Login\Index.cshtml" />
-    <None Include="Web.Debug.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </None>
-    <None Include="Web.Release.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Scripts\jquery-1.9.1.intellisense.js" />
-    <Content Include="AddIn\App.js" />
-    <Content Include="AddIn\Home\Home.css" />
-    <Content Include="AddIn\Home\Home.html" />
-    <Content Include="AddIn\Home\Home.js" />
-    <Content Include="Content\Office.css" />
-    <Content Include="Images\Close.png" />
-    <Content Include="Scripts\jquery-1.9.1.js" />
-    <Content Include="Scripts\jquery-1.9.1.min.js" />
-    <Content Include="Scripts\jquery-1.9.1.min.map" />
-    <None Include="Scripts\_references.js" />
     <None Include="Scripts\Office\1\outlook-win32.debug-vsdoc.js" />
     <None Include="Scripts\Office\1\office-vsdoc.js" />
-    <Content Include="Content\OfficeThemes.css" />
     <Content Include="Scripts\Office\1\access-web-16.00.debug.js" />
     <Content Include="Scripts\Office\1\access-web-16.00.js" />
     <Content Include="Scripts\Office\1\ar-sa\office_strings.debug.js" />
@@ -387,7 +357,36 @@
     <Content Include="Scripts\Office\1\zh-tw\outlook_strings.js" />
     <Content Include="Scripts\Office\metadata\endpoints.xml" />
     <Content Include="Scripts\Office\metadata\features.xml" />
-    <Content Include="Scripts\Office\MicrosoftAjax.js" />
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Scripts\jquery-1.10.2.min.map" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\SP\index.cshtml" />
+    <Content Include="Views\Shared\_WebLayout.cshtml" />
+    <Content Include="Views\Login\Index.cshtml" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Scripts\jquery-1.9.1.intellisense.js" />
+    <Content Include="AddIn\App.js" />
+    <Content Include="AddIn\Home\Home.css" />
+    <Content Include="AddIn\Home\Home.html" />
+    <Content Include="AddIn\Home\Home.js" />
+    <Content Include="Content\Office.css" />
+    <Content Include="Images\Close.png" />
+    <Content Include="Scripts\jquery-1.9.1.js" />
+    <Content Include="Scripts\jquery-1.9.1.min.js" />
+    <Content Include="Scripts\jquery-1.9.1.min.map" />
+    <None Include="Scripts\_references.js" />
     <Content Include="Scripts\_officeintellisense.js" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -405,7 +404,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <TypeScriptCompile Include="Scripts\typings\jquery\jquery.d.ts" />
     <TypeScriptCompile Include="typings\sharepoint\autofill.d.ts" />
     <TypeScriptCompile Include="typings\sharepoint\callout.d.ts" />
     <TypeScriptCompile Include="typings\sharepoint\clientpeoplepicker.d.ts" />

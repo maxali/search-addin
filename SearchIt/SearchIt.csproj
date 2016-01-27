@@ -43,6 +43,7 @@
     <UseVSHostingProcess>false</UseVSHostingProcess>
   </PropertyGroup>
   <ItemGroup>
+    <None Include="packages.config" />
     <None Include="SearchItManifest\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{42d03429-b443-4fc9-a5a4-0d0c64196300}</SharePointProjectItemId>
     </None>

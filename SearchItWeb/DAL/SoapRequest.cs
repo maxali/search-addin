@@ -14,10 +14,10 @@ namespace SearchItWeb.DAL
         public string action { get; set; }
         public CookieContainer cookie { get; set; }
 
-        public SoapRequest(string _url, string _action)
+        public SoapRequest(string soapEndpoint, string soapAction)
         {
-            this.url = _url;
-            this.action = _action;
+            this.url = soapEndpoint;
+            this.action = soapAction;
         }
 
         /// <summary>

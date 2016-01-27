@@ -12,29 +12,68 @@ namespace SearchItWeb.Controllers
 {
     public class SPController : Controller
     {
-        // GET: SP
-        public async Task<JsonResult> Index(string username, string password, string url)
+        [HttpPost]
+        public async Task<JsonResult> Auth(string username, string password, string url)
         {
             SPOnlineLoginHelper SPLogin = new SPOnlineLoginHelper(new Uri(url), username, password);
-            CookieContainer cookie = await SPLogin.GetCookieContainer();
-
-            SoapRequest soap = new SoapRequest("https://crayonsky.sharepoint.com/_vti_bin/sites.asmx", "http://schemas.microsoft.com/sharepoint/soap/GetUpdatedFormDigestInformation");
-            soap.cookie = cookie;
-
-            string digestToken = soap.CallWebService();
-
-            Tokens token = new Tokens();
-            token.cookies = cookie.GetCookies(new Uri(url));
-            token.digest = digestToken;
-
-            //return Json(cookie.GetCookies(new Uri(url)));
-            return Json(token);  
+            SPAccessTokens accessTokens = await SPLogin.GetAccessTokens();
+            return Json(accessTokens);  
         }
 
-        private class Tokens
+        [HttpPost]
+        public JsonResult DigestToken(string url)
         {
-            public string digest { get; set; }
-            public CookieCollection cookies { get; set; }
+            CookieContainer cookieContainer = new CookieContainer();
+            HttpCookieCollection oCookies = Request.Cookies;
+            
+            for (int j = 0; j < oCookies.Count; j++)
+            {
+
+                HttpCookie oCookie = oCookies.Get(j);
+                if (oCookie.Name != "FedAuth" && oCookie.Name != "rtFa") continue;
+                Cookie oC = new Cookie();
+
+                // Convert between the System.Net.Cookie to a System.Web.HttpCookie...
+                oC.Domain = Request.Url.Host;
+                oC.Expires = oCookie.Expires;
+                oC.Name = oCookie.Name;
+                oC.Path = oCookie.Path;
+                oC.Secure = oCookie.Secure;
+                oC.Value = oCookie.Value;
+
+                cookieContainer.Add(oC);
+            }
+            
+            SPOnlineLoginHelper SPLogin = new SPOnlineLoginHelper(new Uri(url));
+            SPAccessTokens accessTokens = SPLogin.RefreshDigestToken(url, cookieContainer);
+            return Json(accessTokens);
         }
+
+        public HttpCookie CookieToHttpCookie(Cookie cookie)
+    {
+        HttpCookie httpCookie = new HttpCookie(cookie.Name);
+        
+
+        /*Copy keys and values*/
+        foreach (string value in cookie.Value.Split('&'))
+        {
+            string[] val = value.Split('=');
+            httpCookie.Values.Add(val[0],val[1]); /* or httpCookie[val[0]] = val[1];  */
+        }
+       
+
+        /*Copy Porperties*/
+        httpCookie.Domain = cookie.Domain;
+        httpCookie.Expires = cookie.Expires;
+        httpCookie.HttpOnly = cookie.HttpOnly;
+        httpCookie.Path = cookie.Path;
+        httpCookie.Secure = cookie.Secure;
+        
+
+        return httpCookie;
+       
+
+    }
+
     }
 }
