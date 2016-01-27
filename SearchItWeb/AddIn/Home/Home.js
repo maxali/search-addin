@@ -27,9 +27,10 @@
             });
 
             $('#login').click(function () {
-                SPTemp.login("mohamed@crayonsky.onmicrosoft.com",
-                    "JaalleDheere10",
-                    "http://crayonsky.sharepoint.com",
+                SPTemp.login(
+                    $("#user-name").val(),
+                    $("#password").val(),
+                    $("#sharepoint-server").val(),
                     function () {
                         console.log("Login success");
                     },

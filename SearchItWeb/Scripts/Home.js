@@ -1,5 +1,5 @@
 ﻿/// <reference path="../App.js" />
-/// <reference path="../../Content/js/SPLogin/SPTemp.js" />
+/// <reference path="../Content/js/SPLogin/SPTemp.js" />
 
 (function () {
     "use strict";
@@ -7,6 +7,9 @@
     Office.initialize = function (reason) {
         $(document).ready(function () {
             app.initialize();
+            $("#sharepoint-server").val(Office.context.document.settings.get('sharepoint-server'));
+            $("#user-name").val(Office.context.document.settings.get('sharepoint-username'));
+
             app.data = [
                 { "ID": 1, "Name": "Mr Hakin Andrin", "Tel": "95330558" },
                 { "ID": 2, "Name": "Mr Sharepoint Office", "Tel": "98554855" }
@@ -25,17 +28,38 @@
             $('#get-data-from-selection').click(function () {
                 app.addBinding(elSearch.val());
             });
-
+            $('#getDigest').click(function () {
+                SPTemp.getDigestToken("https://crayonsky.sharepoint.com");
+            });
             $('#login').click(function () {
-                SPTemp.login("mohamed@crayonsky.onmicrosoft.com",
-                    "JaalleDheere10",
-                    "http://crayonsky.sharepoint.com",
+                $(this).attr("value", "Working ...");
+                SPTemp.login(
+                    $("#user-name").val(),
+                    $("#password").val(),
+                    $("#sharepoint-server").val(),
                     function () {
-                        console.log("Login success");
+                        Office.context.document.settings.set('sharepoint-server', $("#sharepoint-server").val());
+                        Office.context.document.settings.set('sharepoint-username', $("#user-name").val());
+                        Office.context.document.settings.saveAsync(function (asyncResult) {
+                            if (asyncResult.status == Office.AsyncResultStatus.Failed) {
+                                console.log('Settings save failed. Error: ' + asyncResult.error.message);
+                            } else {
+                                console.log('Settings saved.');
+                            }
+                        });
+                        $(this).attr("value", "You are in!");
+                        app.showNotification("Success", "Login success");
                     },
                     function () {
-                        console.log("login fail");
+                        $(this).attr("Login");
+                        app.showNotification("Error", "login fail");
                     })
+            });
+
+            $('#checkLogin').click(function () {
+                var cookie = getCookie('FedAuth');
+                console.log(cookie);
+                $(this).html(cookie);
             });
 
             $('.ms-Pivot-link').click(function () {

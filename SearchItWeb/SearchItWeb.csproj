@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
   <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
   <Import Project="..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
@@ -26,6 +27,7 @@
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
     <TargetOfficeVersion>15.0</TargetOfficeVersion>
+    <TypeScriptToolsVersion>1.6</TypeScriptToolsVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -50,10 +52,13 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.SharePoint.Client, Version=16.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.SharePoint.Client.Runtime, Version=16.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Net.Http" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -108,6 +113,7 @@
     <Content Include="Content\js\SPLogin\SAML.xml" />
     <Content Include="Content\js\SPLogin\SPTemp.js" />
     <Content Include="Content\Site.css" />
+    <Content Include="DAL\SAML.xml" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Images\495.gif" />
@@ -128,6 +134,9 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\SP\index.cshtml" />
+    <Content Include="Views\Shared\_WebLayout.cshtml" />
+    <Content Include="Views\Login\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -385,10 +394,52 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\SPController.cs" />
+    <Compile Include="DAL\SoapRequest.cs" />
+    <Compile Include="DAL\SPOnlineLoginHelper.cs" />
+    <Compile Include="DAL\SPService.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="Scripts\typings\jquery\jquery.d.ts" />
+    <TypeScriptCompile Include="typings\sharepoint\autofill.d.ts" />
+    <TypeScriptCompile Include="typings\sharepoint\callout.d.ts" />
+    <TypeScriptCompile Include="typings\sharepoint\clientpeoplepicker.d.ts" />
+    <TypeScriptCompile Include="typings\sharepoint\clienttemplates.d.ts" />
+    <TypeScriptCompile Include="typings\sharepoint\microsoft.ajax.d.ts" />
+    <TypeScriptCompile Include="typings\sharepoint\mQuery.d.ts" />
+    <TypeScriptCompile Include="typings\sharepoint\reputation.d.ts" />
+    <TypeScriptCompile Include="typings\sharepoint\SP.BusinessData.d.ts" />
+    <TypeScriptCompile Include="typings\sharepoint\SP.d.ts" />
+    <TypeScriptCompile Include="typings\sharepoint\SP.DocumentManagement.d.ts" />
+    <TypeScriptCompile Include="typings\sharepoint\SP.Init.d.ts" />
+    <TypeScriptCompile Include="typings\sharepoint\SP.JSGrid.d.ts" />
+    <TypeScriptCompile Include="typings\sharepoint\SP.Policy.d.ts" />
+    <TypeScriptCompile Include="typings\sharepoint\SP.Publishing.d.ts" />
+    <TypeScriptCompile Include="typings\sharepoint\SP.RequestExecutor.d.ts" />
+    <TypeScriptCompile Include="typings\sharepoint\SP.Ribbon.d.ts" />
+    <TypeScriptCompile Include="typings\sharepoint\SP.Search.d.ts" />
+    <TypeScriptCompile Include="typings\sharepoint\SP.Sharing.d.ts" />
+    <TypeScriptCompile Include="typings\sharepoint\SP.Social.d.ts" />
+    <TypeScriptCompile Include="typings\sharepoint\SP.Taxonomy.d.ts" />
+    <TypeScriptCompile Include="typings\sharepoint\SP.UI.ApplicationPages.d.ts" />
+    <TypeScriptCompile Include="typings\sharepoint\SP.UI.Controls.d.ts" />
+    <TypeScriptCompile Include="typings\sharepoint\SP.UI.d.ts" />
+    <TypeScriptCompile Include="typings\sharepoint\SP.UserProfiles.d.ts" />
+    <TypeScriptCompile Include="typings\sharepoint\SP.Utilities.d.ts" />
+    <TypeScriptCompile Include="typings\sharepoint\SP.WebParts.d.ts" />
+    <TypeScriptCompile Include="typings\sharepoint\SP.Workflow.d.ts" />
+    <TypeScriptCompile Include="typings\sharepoint\SP.WorkflowServices.d.ts" />
+    <TypeScriptCompile Include="typings\sharepoint\SPAnimation.d.ts" />
+    <TypeScriptCompile Include="typings\sharepoint\SPGantt.d.ts" />
+    <TypeScriptCompile Include="typings\sharepoint\SPO.d.ts" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup />
   <PropertyGroup>
@@ -396,6 +447,7 @@
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
   </PropertyGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
   <ProjectExtensions>
