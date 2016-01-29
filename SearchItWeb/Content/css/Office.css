@@ -59,7 +59,7 @@ h4, h5, h6 {
     font-weight: normal;
 }
 
-form, input, select, button, textarea {
+form, input, select, textarea {
     font-family: "Segoe WP", "Segoe UI", "Arial", sans-serif;
     font-size: 12px;
     line-height: 16px;
@@ -109,7 +109,7 @@ label {
     margin-right: 3px;
 }
 
-input, textarea, select, button {
+input, textarea, select {
     margin: 0 0 5px 0;
     padding: 3px;
     -webkit-box-sizing: border-box;
@@ -126,9 +126,8 @@ input, textarea, select, button {
         padding: 0;
     }
 
-    button, textarea, select,
+     textarea, select,
     input:not([type]),
-    input[type="button"],
     input[type="color"],
     input[type="date"],
     input[type="datetime"],
@@ -149,28 +148,14 @@ input, textarea, select, button {
         background-color: white;
     }
 
-    button, input[type="button"],
+    
     input[type="submit"], input[type="reset"] {
         padding-left: 10px;
         padding-right: 10px;
         text-align: center;
     }
 
-        button:hover:enabled,
-        input[type="button"]:hover:enabled,
-        input[type="submit"]:hover:enabled,
-        input[type="reset"]:hover:enabled {
-            border-color: #7eB4ea;
-            background-color: #e5f1fc;
-        }
-
-        button:active:enabled,
-        input[type="button"]:active:enabled,
-        input[type="submit"]:active:enabled,
-        input[type="reset"]:active:enabled {
-            border-color: #569de5;
-            background-color: #cee5fc;
-        }
+        
 
 /* Common app styling */
 

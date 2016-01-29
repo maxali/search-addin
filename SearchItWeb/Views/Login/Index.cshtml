@@ -32,13 +32,23 @@
 
             <div data-container="companies" id="tab-companies" class="tab selected">
                 <h3>Login to SharePoint</h3>
-                <input id="sharepoint-server" value="https://crayonsky.sharepoint.com" placeholder="SharePoint Server" type="url" />
-                <input id="user-name" value="mohamed@crayonsky.onmicrosoft.com" placeholder="Username" type="email" />
-                <input id="password" placeholder="Password" type="password" />
-                <div>
-                    <button type="button" id="login">Login</button>
-                    <button type="button" id="getList">Get List</button>
-                    <button type="button" id="getDigest">GetDigest</button>
+
+                <div class="ms-TextField">
+                    <label class="ms-Label">SharePoint Server</label> <input class="ms-TextField-field" id="sharepoint-server" type="text">
+                </div>
+                <div class="ms-TextField" >
+                    <label class="ms-Label">Username</label> <input class="ms-TextField-field" id="user-name" type="text">
+                </div>
+                <div class="ms-TextField">
+                    <label class="ms-Label">Password</label> <input class="ms-TextField-field"  id="password" type="password">
+                </div>
+
+                <div class="row">
+                    <form>
+                        <button type="button" class="tiny button" id="login">Login</button>
+                        <button type="button"  class="tiny button" id="getList">Get List</button>
+                        <button type="button" class="tiny button"  id="getDigest">GetDigest</button>
+                    </form>
                 </div>
                 <div class="data"></div>
             </div>
@@ -74,7 +84,8 @@
             SPTemp.getDigestToken("https://crayonsky.sharepoint.com");
         });
         $('#login').click(function () {
-            $(this).attr("value", "Working ...");
+            var loginBtn = $(this);
+            $(loginBtn).addClass('sending').blur();
             SPTemp.login(
                 $("#user-name").val(),
                 $("#password").val(),
@@ -91,14 +102,13 @@
                     // resources are in URLs in the form:
                     // web_url/_layouts/15/resource
                     scriptbase = hostweburl + "/_layouts/15/";
-
-                    console.log(result);
+                    $(loginBtn).removeClass('sending').addClass("success").blur();
 
                 },
                 function (e) {
-                    $(this).attr("Login");
-                    console.log(e);
-                })
+                    $(loginBtn).removeClass('success').blur();
+                }
+            );
         });
 
         $('#getList').click(function () {

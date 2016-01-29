@@ -7,6 +7,10 @@ var app = (function () {
 
     // Common initialization function (to be called from each page)
     app.initialize = function () {
+        app.spServer = app.spServer || "";
+        app.spUsername = app.spUsername || "";
+        app.spRequestDigest = app.spRequestDigest || "";
+
         $.support.cors = true;
         $.ajaxSetup({
             crossDomain: true,
@@ -15,7 +19,7 @@ var app = (function () {
 
         if ($.fn.Pivot) { $('.ms-Pivot').Pivot(); }
         if ($.fn.SearchBox) { $('.ms-SearchBox-field').SearchBox(); }
-        
+        if ($.fn.TextField) { $('.ms-TextField').TextField(); }
 
 
         buildNotification();

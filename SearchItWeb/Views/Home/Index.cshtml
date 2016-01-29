@@ -32,14 +32,37 @@
                 <div class="data"></div>
             </div>
             <div data-container="sharepoint" id="tab-sharepoint" class="tab no-search">
-                <h3>Login to SharePoint</h3>
-                <input id="sharepoint-server" value="https://crayonsky.sharepoint.com" placeholder="SharePoint Server" type="url" />
-                <input id="user-name" value="mohamed@crayonsky.onmicrosoft.com" placeholder="Username" type="email" />
-                <input id="password"  placeholder="Password" type="password" /> 
-                <div>
-                    <button type="button" id="login">Login</button>
-                    <button type="button" id="checkLogin">Check</button>
-                    <button type="button" id="getDigest">GetDigest</button>
+                <div id="sharepoint-login">
+                    <form>
+                        <h3>Login to SharePoint</h3>
+
+                        <div class="ms-TextField">
+                            <label class="ms-Label">SharePoint Server</label>
+                            <input class="ms-TextField-field" id="sharepoint-server" type="text" value="https://crayonsky.sharepoint.com" required>
+                        </div>
+                        <div class="ms-TextField">
+                            <label class="ms-Label">Username</label>
+                            <input class="ms-TextField-field" id="user-name" type="email" value="mohamed@crayonsky.onmicrosoft.com" required>
+                        </div>
+                        <div class="ms-TextField">
+                            <label class="ms-Label">Password</label> 
+                            <input class="ms-TextField-field" id="password" type="password" value="Password1" required>
+                        </div>
+                        <input type="hidden" name="dummy" value="something">
+                        <button type="submit" class="tiny button" id="login">Login</button>
+                    </form>
+                </div>
+                <div id="sharepoint-workspace" >
+                    Choose SharePoint List
+                  
+                        <div class="ms-TextField">
+                            <label class="ms-Label">List Title</label>
+                            <input class="ms-TextField-field" id="list-title" type="text" required>
+                        </div>
+                        <input type="hidden" name="dummy" value="something">
+                        <button type="button" class="tiny button" id="getList">Get List</button>
+                    <button type="button" class="tiny button" id="checkwindow">Check Window</button>
+
                 </div>
                 <div class="data"></div>
             </div>

@@ -19,7 +19,7 @@ SPTemp = SPTemp || {};
     }
 
     function _login(userId, password, url, successBlock, failBlock) {
-        if(userId )
+        if (!userId || !password) failBlock(Error("No user/password was provided."));
         $.ajax({
             url: "/sp/auth",
             type: 'POST',
