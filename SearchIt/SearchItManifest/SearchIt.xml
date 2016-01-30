@@ -9,6 +9,7 @@
   <Description DefaultValue="SearchIt"/>
   <Hosts>
     <Host Name="Document" />
+    <Host Name="Presentation" />
   </Hosts>
   <DefaultSettings>
     <SourceLocation DefaultValue="~remoteAppUrl" />

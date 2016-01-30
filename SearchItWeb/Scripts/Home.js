@@ -5,6 +5,7 @@
     "use strict";
     
     app.addinHome = app.addinHome || {};
+    app.currentTab = "companies"; //default selected tab
     var self = app.addinHome;
 
     // The initialize function must be run each time a new page is loaded
@@ -24,7 +25,7 @@
         $('.ms-Pivot-link').click(self.changePivotTab);
         $('#filldata').click(self.fillAllBindings);
         $('#getList').click(self.getList);
-
+        $('.settingSelect').change(self.resetSettings);
         $("#sharepoint-server").val(Office.context.document.settings.get('sharepoint-server'));
         $("#user-name").val(Office.context.document.settings.get('sharepoint-username'));
 
@@ -66,7 +67,6 @@
 
                 },
                 function (e) {
-                    console.log(e);
                     $(loginBtn).removeClass('success').removeClass('sending');
                 }
             );
@@ -83,6 +83,8 @@
         var _changePivotTab = function () {
             //build tab-ing view
             var targetTab = $('#tab-' + $(this).attr('data-tab-target'));
+            app.currentTab = $(this).attr('data-tab-target');
+
             $('.pivot-tabs .tab').removeClass('selected');
             targetTab.addClass('selected');
 
@@ -90,6 +92,10 @@
             if (!targetTab.hasClass('no-search') && $('.ms-SearchBox-field').val().length > 0)
                 app.search.crossDomainAjaxCall($('.ms-SearchBox-field').val());
         };
+
+        var _resetSettings = function (e) {
+            localStorage[$(this).attr('id')] = $(this).val();
+        }
 
         var _getList = function (e) {
             
@@ -141,6 +147,7 @@
         self.SPLogin = _SPLogin;
         self.searchOnEnter = _searchOnEnter;
         self.getList = _getList;
+        self.resetSettings = _resetSettings;
     })();
 
 })();

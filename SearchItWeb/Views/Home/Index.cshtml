@@ -4,31 +4,33 @@
     </div>
 </div>
 <div id="content-main">
-    <div class="padding">
+    <div class="search-header">
         <div class="ms-SearchBox">
             <input class="ms-SearchBox-field" type="text" style="width:94%"> <label class="ms-SearchBox-label"><i class="ms-SearchBox-icon ms-Icon ms-Icon--search"></i></label> <button class="ms-SearchBox-closeButton"><i class="ms-Icon ms-Icon--x"></i></button>
         </div>
+    </div>
+    <div id="content-tabs" style="padding-top: 0;">
+
         <ul class="ms-Pivot ms-Pivot--tabs">
             <li data-tab-target="companies" class="ms-Pivot-link is-selected">
                 Companies
             </li>
-            <li data-tab-target="people" class="ms-Pivot-link">
-                People
+            <li data-tab-target="images" class="ms-Pivot-link">
+                Images
             </li>
             <li data-tab-target="sharepoint" class="ms-Pivot-link">
                 SharePoint
             </li>
-            <li class="ms-Pivot-link ms-Pivot-link--overflow">
+            <li data-tab-target="settings" class="ms-Pivot-link ms-Pivot-link--overflow">
                 <i class="ms-Pivot-ellipsis ms-Icon ms-Icon--ellipsis"></i>
             </li>
         </ul>
         <div class="tabs pivot-tabs">
             <div class="spinner" style="display:none;text-align: center;margin-top:100px;"><img src="../../Images/495.gif" /></div>
-
             <div data-container="companies" id="tab-companies" class="tab selected">
                 <div class="data"></div>
             </div>
-            <div data-container="people" id="tab-people" class="tab">
+            <div data-container="Images" id="tab-images" class="tab">
                 <div class="data"></div>
             </div>
             <div data-container="sharepoint" id="tab-sharepoint" class="tab no-search">
@@ -45,28 +47,73 @@
                             <input class="ms-TextField-field" id="user-name" type="email" value="mohamed@crayonsky.onmicrosoft.com" required>
                         </div>
                         <div class="ms-TextField">
-                            <label class="ms-Label">Password</label> 
+                            <label class="ms-Label">Password</label>
                             <input class="ms-TextField-field" id="password" type="password" value="Password1" required>
                         </div>
                         <input type="hidden" name="dummy" value="something">
                         <button type="submit" class="tiny button" id="login">Login</button>
                     </form>
                 </div>
-                <div id="sharepoint-workspace" >
+                <div id="sharepoint-workspace">
                     Choose SharePoint List
-                  
-                        <div class="ms-TextField">
-                            <label class="ms-Label">List Title</label>
-                            <input class="ms-TextField-field" id="list-title" type="text" required>
-                        </div>
-                        <input type="hidden" name="dummy" value="something">
-                        <button type="button" class="tiny button" id="getList">Get List</button>
+
+                    <div class="ms-TextField">
+                        <label class="ms-Label">List Title</label>
+                        <input class="ms-TextField-field" id="list-title" type="text" required>
+                    </div>
+                    <input type="hidden" name="dummy" value="something">
+                    <button type="button" class="tiny button" id="getList">Get List</button>
                     <button type="button" class="tiny button" id="checkwindow">Check Window</button>
 
                 </div>
                 <div class="data"></div>
             </div>
+            <div data-container="settings" id="tab-settings" class="tab no-search">
+                <h1>General Settings</h1>
 
+                <label class="ms-Label">Choose Image Type</label>
+                <div class="ms-Dropdown" tabindex="0">
+                    <i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>
+                    <select id="imageType" class="ms-Dropdown-select settingSelect">
+                        <option value="">
+                            Choose image type…
+                        </option>
+                        <option value="face">
+                            Clipart
+                        </option>
+                        <option value="face">
+                            Face
+                        </option>
+                        <option value="lineart">
+                            Lineart
+                        </option>
+                        <option value="photo">
+                            Photo
+                        </option>
+                    </select>
+                </div>
+
+                <label class="ms-Label">Company Search Country</label>
+                <div class="ms-Dropdown" tabindex="0">
+                    <i class="ms-Dropdown-caretDown ms-Icon ms-Icon--caretDown"></i>
+                    <select id="searchCountry" class="ms-Dropdown-select settingSelect">
+                        <option value="">
+                            Choose country…
+                        </option>
+                        <option value="no">
+                            Norway
+                        </option>
+                        <option value="se">
+                            Sweden
+                        </option>
+                        <option value="dk">
+                            Denmark
+                        </option>
+
+                    </select>
+                </div>
+                <div class="data"></div>
+            </div>
         </div>
         <button style="display:none" id="get-data-from-selection" class="ms-Button"><span class="ms-Button-icon"><i class="ms-Icon ms-Icon--plus"></i></span> <span class="ms-Button-label">Search selected company</span> <span class="ms-Button-description">Description of the action this button takes</span></button>
         <button style="display:none" value="FillData" id="filldata" type="button">Fill It!</button>

@@ -134,6 +134,7 @@
     <Content Include="Content\css\foundation.css" />
     <Content Include="Content\css\Office.css" />
     <Content Include="Content\css\OfficeThemes.css" />
+    <Content Include="Content\css\Site.css" />
     <Content Include="Content\js\app.search.js" />
     <Content Include="Content\js\config.js" />
     <Content Include="Content\js\SPLogin\SAML.xml" />

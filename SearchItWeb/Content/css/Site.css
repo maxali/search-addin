@@ -1,0 +1,252 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+
+/* Page-specific styling */
+
+.ms-ListItem:hover {
+    background: #ECEAEA !important;
+    cursor: pointer !important;
+}
+.ms-ListItem .ms-ListItem-secondaryText {
+    color: #0078d7  !important;
+    font-family: 'Segoe UI Semibold WestEuropean','Segoe UI Semibold','Segoe WP Semibold','Segoe UI','Segoe WP',Tahoma,Arial,sans-serif  !important;
+}
+
+.ms-ListItem {
+    padding-left: 10px !important;
+    border-bottom: 1px solid #DED6D6 !important;
+}
+.ms-ListItem-primaryText {
+    padding-right: 20px;
+}
+.ms-ListItem-secondaryText, .ms-ListItem-tertiaryText {padding-right: 0;}
+.ms-ListItem-tertiaryText { line-height: 20px; }
+.ms-SearchBox {
+    margin: 0;
+    width:98% !important;
+}
+
+/** tabs */
+.tab {
+    padding: 10px 10px 10px 0;
+}
+.pivot-tabs {
+
+}
+.pivot-tabs .tab{
+    display: none;
+}
+.pivot-tabs .selected{
+    display: block;
+}
+
+
+#content-header {
+    background: #2a8dd4;
+    color: #fff;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 60px; /* Fixed header height */
+    overflow: auto; /* Disable scrollbars for header */
+    display:none;
+}
+.search-header {
+    position: fixed;
+    width: 100%;
+    height: 38px;
+    background: #dbd8d8;
+    top: 0;
+    z-index: 1;
+    padding: 5px 5px 0 5px;
+    margin-bottom: 0;
+}
+
+#content-main {
+    background: #fff;
+    position: fixed;
+    top: 0;/*60px;*/ /* Same value as #content-header's height */
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: auto; /* Enable scrollbars within main content section */
+}
+#content-tabs {
+    position: relative;
+    margin-top: 45px
+}
+#content-tabs ul{
+    border-bottom: 1px solid #DED6D6;
+}
+#content-tabs .tabs{
+    padding-left: 10px;
+}
+
+#notification-message {
+    background-color: #818285;
+    color: #fff;
+    position: absolute;
+    width: 100%;
+    min-height: 80px;
+    right: 0;
+    z-index: 100;
+    bottom: 0;
+    display: none; /* Hidden until invoked */
+}
+
+    #notification-message #notification-message-header {
+        font-size: medium;
+        margin-bottom: 10px;
+    }
+
+    #notification-message #notification-message-close {
+        background-image: url("../Images/Close.png");
+        background-repeat: no-repeat;
+        width: 24px;
+        height: 24px;
+        position: absolute;
+        right: 5px;
+        top: 5px;
+        cursor: pointer;
+    }
+
+.img-wrap img {
+    width: 260px;
+    -webkit-transition: all 0.5s ease-in;
+    padding: 0;
+    -moz-transition: all 0.5s ease-in;
+    -o-transition: all 0.5s ease-in;
+    transition: all 0.5s ease-in;
+}
+.img-wrap img:hover {
+     -ms-transform:scale(1.03); /* IE 9 */
+    -moz-transform:scale(1.03); /* Firefox */
+ -webkit-transform:scale(1.03); /* Safari and Chrome */
+      -o-transform:scale(1.03); /* Opera */
+         transform:scale(1.03);
+
+}
+.img-wrap {
+    overflow: hidden;
+    padding: 5px;
+    border: 1px solid #adadad;
+    margin: 10px 10px 0 0;
+    width: 260px;
+    display: inline-block;
+}
+
+
+
+button:not(.disabled):before {
+  content: '';
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  margin-top: -11px;
+  width: 20px;
+  height: 20px;
+  border: 4px solid;
+  border-left-color: transparent;
+  border-radius: 50%;
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=0);
+  opacity: 0;
+  -moz-transition-duration: 0.5s;
+  -o-transition-duration: 0.5s;
+  -webkit-transition-duration: 0.5s;
+  transition-duration: 0.5s;
+  -moz-transition-property: opacity;
+  -o-transition-property: opacity;
+  -webkit-transition-property: opacity;
+  transition-property: opacity;
+    animation-duration: 1s;
+  -moz-animation-duration: 1s;
+  -webkit-animation-duration: 1s;
+  -o-animation-duration: 1s;
+  -moz-animation-iteration-count: infinite;
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+  -o-animation-iteration-count: infinite;
+  -moz-animation-name: rotate;
+  -webkit-animation-name: rotate;
+  animation-name: rotate;
+  -moz-animation-timing-function: linear;
+  -webkit-animation-timing-function: linear;
+  animation-timing-function: linear;
+}
+button:not(.disabled):after {
+  content: '';
+  display: inline-block;
+  height: 100%;
+  width: 0px;
+  -moz-transition-delay: 0.5s;
+  -o-transition-delay: 0.5s;
+  -webkit-transition-delay: 0.5s;
+  transition-delay: 0.5s;
+  -moz-transition-duration: 0.75s;
+  -o-transition-duration: 0.75s;
+  -webkit-transition-duration: 0.75s;
+  transition-duration: 0.75s;
+  -moz-transition-property: width;
+  -o-transition-property: width;
+  -webkit-transition-property: width;
+  transition-property: width;
+}
+button:not(.disabled).sending {
+  pointer-events: none;
+  cursor: not-allowed;
+}
+button:not(.disabled).sending:not(.expand) {
+  text-align: left;
+}
+button:not(.disabled).sending:before {
+  -moz-transition-delay: 0.5s;
+  -o-transition-delay: 0.5s;
+  -webkit-transition-delay: 0.5s;
+  transition-delay: 0.5s;
+  -moz-transition-duration: 1s;
+  -o-transition-duration: 1s;
+  -webkit-transition-duration: 1s;
+  transition-duration: 1s;
+  filter: progid:DXImageTransform.Microsoft.Alpha(enabled=false);
+  opacity: 1;
+}
+button:not(.disabled).sending:after {
+  -moz-transition-delay: 0s;
+  -o-transition-delay: 0s;
+  -webkit-transition-delay: 0s;
+  transition-delay: 0s;
+  width: 20px;
+}
+
+@keyframes rotate {
+  0% {
+    -moz-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -moz-transform: rotate(360deg);
+    -ms-transform: rotate(360deg);
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+  

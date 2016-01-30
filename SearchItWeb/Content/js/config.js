@@ -1,5 +1,5 @@
 ﻿//config file
-var app = app || {};
+window.app = window.app || {};
 app.config = app.config || {};
 (function (config) {
     "use strict";
@@ -9,16 +9,23 @@ app.config = app.config || {};
     var SEARCH_ACCOUNT = "profile=maxali";
     var SEARCH_KEY = "key=5167130060251630243";
 
+    var GOOGLE_SEARCH_ENDPOINT = "https://www.googleapis.com/customsearch/v1";
+    var GOOGLE_SEARCH_ENGINE_ID = "cx=008416362366509820322:h8z60rokcve";
+    var GOOGLE_SEARCH_KEY = "key=AIzaSyAFkTFovP1f5BQHu6Kr3NaaJfl-DId3T7A";
+
+    app.searchCountry = localStorage["searchCountry"] || "no"; 
+    app.imageType = localStorage["imageType"] || undefined;
+
     // public properties
-    config.searchAPI = SEARCH_ENDPOINT + "?" + SEARCH_ACCOUNT + "&" + SEARCH_KEY + "&country=no&version=1.1.3&";
+    config.searchAPI = SEARCH_ENDPOINT + "?" + SEARCH_ACCOUNT + "&" + SEARCH_KEY + "&country=" + app.searchCountry + "&version=1.1.3&";
 
     config.getEndpointBySerive = function (service) {
         switch (service) {
             case "companies":
                 return app.config.searchAPI;
                 break;
-            case "people":
-                return SEARCH_ENDPOINT + "?" + SEARCH_ACCOUNT + "&" + SEARCH_KEY + "&country=se&version=1.1.3&";
+            case "images":
+                return GOOGLE_SEARCH_ENDPOINT + "?" + GOOGLE_SEARCH_ENGINE_ID + "&" + GOOGLE_SEARCH_KEY + "&country=se&version=1.1.3&";
                 break;
             default:
                 return "";

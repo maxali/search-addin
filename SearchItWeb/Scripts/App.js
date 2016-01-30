@@ -3,7 +3,7 @@
 var app = (function () {
     "use strict";
 
-    var app = {};
+    var app = window.app || {};
 
     // Common initialization function (to be called from each page)
     app.initialize = function () {
@@ -20,8 +20,8 @@ var app = (function () {
         if ($.fn.Pivot) { $('.ms-Pivot').Pivot(); }
         if ($.fn.SearchBox) { $('.ms-SearchBox-field').SearchBox(); }
         if ($.fn.TextField) { $('.ms-TextField').TextField(); }
-
-
+        if ($.fn.Dropdown) { $('.ms-Dropdown').Dropdown(); }
+        
         buildNotification();
     };
 

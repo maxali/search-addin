@@ -16,21 +16,32 @@ app.search = app.search || {};
         // target tab fetched from selected tab
         var targetTab = $('.tab.selected > .data');
         targetTab.html("");
-
-        var searchAction = $('.tab.selected').attr('data-container');
+        var search_word = ((app.currentTab != "images") ? "search_word=" : "searchType=image&q=") + search;
+        
+        var searchAction = app.currentTab;
+        var apiUrl = app.config.getEndpointBySerive(searchAction) + search_word;
         $.ajax({
-            url: app.config.getEndpointBySerive(searchAction) + "search_word=" + search,
+            url: apiUrl,
             type: 'GET',
             async: false,
         }).success(function (response) {
+            var responseData = response.items || response.adverts;
 
-            if (response.adverts.length > 0) {
+            if (responseData.length > 0) {
                 app.hideNotification();
 
-                $(targetTab).html(unescape(_buildCompanyInfoUI(response.adverts)));
+                $(targetTab).html(unescape(_buildSearchDataUI(responseData)));
                 $('.ms-ListItem').click(function (e) {
                     _setInHtml($(this).attr('data-to-paste'));
                 })
+                $('.img-wrap img').click(function (e) {
+                    var img = $(this).parent().html().replace("<img", "<img  width=\"50%\" height=\"50%\"  ");
+                    Office.context.document.setSelectedDataAsync(img, { coercionType: Office.CoercionType.Html }, function (res) {
+                        if (res.status == "failed") {
+                            app.showNotification("Error", res.error.message);
+                        }
+                    });
+                });
             }
             else
                 app.showNotification("Not found!", "No data found! Try searching again.");
@@ -38,6 +49,31 @@ app.search = app.search || {};
         }).error(function (response) {
             app.showNotification("Error", response.statusText);
         });
+    }
+
+    function _buildSearchDataUI(data) {
+
+        switch (app.currentTab) {
+            case "images":
+                return _buildImagesUI(data);
+                break;
+            case "companies":
+                return _buildCompanyInfoUI(data);
+                break;
+        }
+
+    }
+
+    function _buildImagesUI(data) {
+        var searchData = "<div class='image-list'>";
+
+        $.each(data, function (i, item) {
+            searchData += "<div class='img-wrap'><img src='" + this.link + "'/></div>" //image.thumbnailLink
+
+        });
+        searchData += "</div>"
+        return searchData;
+
     }
 
     function _getCompany(id) {
