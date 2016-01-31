@@ -135,6 +135,13 @@
     <Content Include="Content\css\Office.css" />
     <Content Include="Content\css\OfficeThemes.css" />
     <Content Include="Content\css\Site.css" />
+    <Content Include="Content\Images\searchit-icon-32x32.png" />
+    <Content Include="Content\Images\searchit-icon.png" />
+    <Content Include="Content\Images\SearchIt32.png" />
+    <Content Include="Content\Images\SearchIt36.png" />
+    <Content Include="Content\Images\SearchIt48.png" />
+    <Content Include="Content\Images\SearchIt64.png" />
+    <Content Include="Content\Images\SearchIt96.png" />
     <Content Include="Content\js\app.search.js" />
     <Content Include="Content\js\config.js" />
     <Content Include="Content\js\SPLogin\SAML.xml" />
@@ -149,6 +156,8 @@
     <Content Include="Scripts\App.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <None Include="Properties\PublishProfiles\fillit.pubxml" />
+    <None Include="Properties\PublishProfiles\SearchIt.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\Home.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -397,6 +406,7 @@
     <Content Include="Views\Shared\_WebLayout.cshtml" />
     <Content Include="Views\Login\Index.cshtml" />
     <Content Include="Views\Auth\Code.cshtml" />
+    <Content Include="Views\Support\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -427,6 +437,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\SPController.cs" />
+    <Compile Include="Controllers\SupportController.cs" />
     <Compile Include="DAL\SoapRequest.cs" />
     <Compile Include="DAL\SPOnlineLoginHelper.cs" />
     <Compile Include="DAL\SPService.cs" />

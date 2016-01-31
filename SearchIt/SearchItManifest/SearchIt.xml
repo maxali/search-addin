@@ -2,17 +2,24 @@
 <!--Created:cb85b80c-f585-40ff-8bfc-12ff4d0e34a9-->
 <OfficeApp xmlns="http://schemas.microsoft.com/office/appforoffice/1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="TaskPaneApp">
   <Id>56ec689b-1836-4df5-857a-cd4f60efcf56</Id>
-  <Version>1.0.0.0</Version>
-  <ProviderName>SkyData</ProviderName>
+  <Version>1.0.0.1</Version>
+  <ProviderName>Maxali</ProviderName>
   <DefaultLocale>en-US</DefaultLocale>
   <DisplayName DefaultValue="SearchIt" />
-  <Description DefaultValue="SearchIt"/>
+  <Description DefaultValue="SearchIt lets you find company information and images on the web."/>
+  <IconUrl DefaultValue="http://searchit.azurewebsites.net/content/images/searchit-icon-32x32.png" />
+  <HighResolutionIconUrl DefaultValue="http://searchit.azurewebsites.net/content/images/SearchIt64.png" />
+  <SupportUrl DefaultValue="https://searchit.azurewebsites.net/support" />
+  <AppDomains>
+    <AppDomain>http://searchit.azurewebsites.net</AppDomain>
+    <AppDomain>https://www.googleapis.com</AppDomain>
+    <AppDomain>https://api.eniro.com</AppDomain>
+  </AppDomains>
   <Hosts>
     <Host Name="Document" />
-    <Host Name="Presentation" />
   </Hosts>
   <DefaultSettings>
-    <SourceLocation DefaultValue="~remoteAppUrl" />
+    <SourceLocation DefaultValue="https://searchit.azurewebsites.net" />
   </DefaultSettings>
   <Permissions>ReadWriteDocument</Permissions>
 </OfficeApp>

@@ -8,6 +8,9 @@
     <WebStackScaffolding_LayoutPageFile>~/Views/Shared/_WebLayout.cshtml</WebStackScaffolding_LayoutPageFile>
     <WebStackScaffolding_IsAsyncSelected>False</WebStackScaffolding_IsAsyncSelected>
     <WebStackScaffolding_ViewDialogWidth>600</WebStackScaffolding_ViewDialogWidth>
+    <NameOfLastUsedPublishProfile>SearchIt</NameOfLastUsedPublishProfile>
+    <ProfileToSelectInPublishDialog>
+    </ProfileToSelectInPublishDialog>
   </PropertyGroup>
   <ProjectExtensions>
     <VisualStudio>
